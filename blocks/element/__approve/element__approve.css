@@ -1,0 +1,13 @@
+.element__approve {
+    display: inline-block;
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../images/disabled.svg);
+    transition: all .25s;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.element__approve:hover {
+    opacity: .5;
+}

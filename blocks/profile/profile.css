@@ -1,0 +1,6 @@
+.profile {
+    display: grid;
+    grid-template-columns: 120px auto 150px;
+    margin-top: 40px;
+    align-items:center
+}
