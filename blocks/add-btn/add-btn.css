@@ -14,3 +14,9 @@
 .add-btn:hover {
     opacity: .6;
 }
+
+@media screen and (max-width: 380px) {
+    .add-btn {
+        width: 282px;
+    }
+}
