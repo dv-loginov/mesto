@@ -10,14 +10,12 @@ const popup = document.querySelector('.popup');
 const closePopup = document.querySelector('.popup__close');
 
 editBtn.onclick = () => {
-    // popup.style.display = 'flex';
     popup.classList.add('popup_opened');
     nameInput.value = title.textContent;
     jobInput.value = subtitle.textContent;
 }
 
 closePopup.onclick = () => {
-    // popup.style.display = 'none';
     popup.classList.remove('popup_opened');
 }
 
@@ -25,8 +23,7 @@ function handleFormSubmit (evt) {
     evt.preventDefault(); 
     title.textContent = nameInput.value;
     subtitle.textContent = jobInput.value;
-    popup.classList.remove('popup_opened');
-    // popup.style.display = 'none';
+    closePopup.onclick();
 }
 
 formElement.addEventListener('submit', handleFormSubmit);

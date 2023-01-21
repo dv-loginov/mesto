@@ -1,3 +1,5 @@
-.popup__container{
+.popup__container {
     position: relative;
+    background: #FFF;
+    border-radius: 10px;
 }

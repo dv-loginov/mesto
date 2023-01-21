@@ -1,8 +1,9 @@
 .add-btn {
     width: 150px;
-    height: 50px;
+    min-height: 50px;
     background-image: url(../../../images/add-btn.svg);
     background-position: center;
+    background-size: 22px 22px;
     background-repeat: no-repeat;
     background-color: #000;
     cursor: pointer;
@@ -18,5 +19,6 @@
 @media screen and (max-width: 380px) {
     .add-btn {
         width: 282px;
+        background-size: 16px 16px;
     }
 }
