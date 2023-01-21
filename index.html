@@ -3,7 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
+  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="./pages/index.css">
 </head>
 
@@ -12,75 +15,81 @@
     <a href="#" class="logo"></a>
   </header>
   <main>
-    <div class="profile">
-      <img src="./images/avatar.png" alt="Аватар" class="profile__avatar">
-      <div class="profile__info">
-        <div class="profile__row">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button class="profile__edit-btn"></button>
+    <section>
+      <div class="profile">
+        <img src="./images/avatar.png" alt="Аватар" class="profile__avatar">
+        <div class="profile__info">
+          <div class="profile__row">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button class="profile__edit-btn" type="button"></button>
+          </div>
+          <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <p class="profile__subtitle">Исследователь океана</p>
+        <button class="add-btn" type="button"></button>
       </div>
-      <button class="add-btn"></button>
-    </div>
-    <ul class="elements">
-      <li class="element">
-        <img src="./images/img-1.png" alt="Карачаевск" class="element__img">
-        <div class="element__row">
-          <h2 class="element__name">Карачаевск</h2>
-          <div class="element__approve"></div>
-        </div>
-      </li>
-      <li class="element">
-        <img src="./images/img-2.png" alt="Гора Эльбрус" class="element__img">
-        <div class="element__row">
-          <h2 class="element__name">Гора Эльбрус</h2>
-          <div class="element__approve"></div>
-        </div>
-      </li>
-      <li class="element">
-        <img src="./images/img-3.png" alt="Домбай" class="element__img">
-        <div class="element__row">
-          <h2 class="element__name">Домбай</h2>
-          <div class="element__approve"></div>
-        </div>
-      </li>
-      <li class="element">
-        <img src="./images/img-4.png" alt="Гора Эльбрус" class="element__img">
-        <div class="element__row">
-          <h2 class="element__name">Гора Эльбрус</h2>
-          <div class="element__approve"></div>
-        </div>
-      </li>
-      <li class="element">
-        <img src="./images/img-5.png" alt="Домбай" class="element__img">
-        <div class="element__row">
-          <h2 class="element__name">Домбай</h2>
-          <div class="element__approve"></div>
-        </div>
-      </li>
-      <li class="element">
-        <img src="./images/img-6.png" alt="Карачаево-Черкесия" class="element__img">
-        <div class="element__row">
-          <h2 class="element__name">Карачаево-Черкесия</h2>
-          <div class="element__approve"></div>
-        </div>
-      </li>
-    </ul>
+    </section>
+    <section>
+      <ul class="elements">
+        <li class="element">
+          <img src="./images/img-1.png" alt="Карачаевск" class="element__img">
+          <div class="element__row">
+            <h2 class="element__name">Карачаевск</h2>
+            <button type="button" class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img src="./images/img-2.png" alt="Гора Эльбрус" class="element__img">
+          <div class="element__row">
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <button type="button" class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img src="./images/img-3.png" alt="Домбай" class="element__img">
+          <div class="element__row">
+            <h2 class="element__name">Домбай</h2>
+            <button type="button" class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img src="./images/img-4.png" alt="Гора Эльбрус" class="element__img">
+          <div class="element__row">
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <button type="button" class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img src="./images/img-5.png" alt="Домбай" class="element__img">
+          <div class="element__row">
+            <h2 class="element__name">Домбай</h2>
+            <button type="button" class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img src="./images/img-6.png" alt="Карачаево-Черкесия" class="element__img">
+          <div class="element__row">
+            <h2 class="element__name">Карачаево-Черкесия</h2>
+            <button type="button" class="element__btn"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
   </main>
-  <footer class="footer">&#169; 2020 Mesto Russia</footer>
+  <footer class="footer">
+    <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
+  </footer>
   <div class="popup">
     <div class="popup__container">
-      <form action="#" class="form">
-        <div class="form__title">Редактировать профиль</div>
-        <input type="text" class="form__input" name="name" value="111111111">
-        <input type="text" class="form__input" name="job" value="222222222">
+      <form action="#" class="form" name="edit">
+        <h3 class="form__title">Редактировать профиль</h3>
+        <input type="text" class="form__input" name="name" value="Жак-Ив Кусто">
+        <input type="text" class="form__input" name="job" value="Исследователь океана">
         <button type="submit" class="form__btn">Сохранить</button>
       </form>
-      <div class="popup__close"></div>
+      <button type="button" class="popup__close"></button>
     </div>
   </div>
-  <script src="js/app.js"></script>
+  <script src="scripts/scripts.js"></script>
 </body>
 
 </html>
