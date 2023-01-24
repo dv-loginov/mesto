@@ -12,6 +12,8 @@
     padding: 0;
     border: none;
     transition: all .25s;
+    margin-top: 48px;
+    box-sizing: border-box;
 }
 
 .form__btn:hover {
