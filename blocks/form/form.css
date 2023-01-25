@@ -1,10 +1,9 @@
 .form {
-    padding: 36px;
-    box-sizing: border-box;
+    margin-top: 47px;
 }
 
 @media screen and (max-width: 550px) {
     .form {
-        padding: 25px 22px;
+        margin-top: 75px;
     }
 }
