@@ -1,4 +1,4 @@
-.element__btn {
+.element__btn-like {
     width: 22px;
     height: 19px;
     background-image: url(../../../images/disabled.svg);
@@ -11,6 +11,6 @@
     background-color: #fff;
 }
 
-.element__btn:hover {
+.element__btn-like:hover {
     opacity: .5;
 }

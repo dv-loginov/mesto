@@ -29,59 +29,17 @@
       </div>
     </section>
     <section>
-      <ul class="elements">
-        <li class="element">
-          <img src="./images/img-1.png" alt="Карачаевск" class="element__img">
-          <div class="element__row">
-            <h2 class="element__name">Карачаевск</h2>
-            <button type="button" class="element__btn"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/img-2.png" alt="Гора Эльбрус" class="element__img">
-          <div class="element__row">
-            <h2 class="element__name">Гора Эльбрус</h2>
-            <button type="button" class="element__btn"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/img-3.png" alt="Домбай" class="element__img">
-          <div class="element__row">
-            <h2 class="element__name">Домбай</h2>
-            <button type="button" class="element__btn"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/img-4.png" alt="Гора Эльбрус" class="element__img">
-          <div class="element__row">
-            <h2 class="element__name">Гора Эльбрус</h2>
-            <button type="button" class="element__btn"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/img-5.png" alt="Домбай" class="element__img">
-          <div class="element__row">
-            <h2 class="element__name">Домбай</h2>
-            <button type="button" class="element__btn"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/img-6.png" alt="Карачаево-Черкесия" class="element__img">
-          <div class="element__row">
-            <h2 class="element__name">Карачаево-Черкесия</h2>
-            <button type="button" class="element__btn"></button>
-          </div>
-        </li>
-      </ul>
+      <ul class="elements"></ul>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
+
+  <div class="popup popup_type_profile">
     <div class="popup__container">
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form action="#" class="form" name="edit">
+      <form action="#" class="form" name="edit-profile">
         <input type="text" class="form__input" name="name" value="Жак-Ив Кусто">
         <input type="text" class="form__input" name="job" value="Исследователь океана">
         <button type="submit" class="form__btn">Сохранить</button>
@@ -89,7 +47,39 @@
       <button type="button" class="popup__close"></button>
     </div>
   </div>
-  <script src="scripts/scripts.js"></script>
+  
+  <div class="popup popup_type_place">
+    <div class="popup__container">
+      <h3 class="popup__title">Новое место</h3>
+      <form action="#" class="form" name="edit-place">
+        <input type="text" class="form__input" name="name" placeholder="Название" value="">
+        <input type="text" class="form__input" name="url"  placeholder="Ссылка на картинку" value="">
+        <button type="submit" class="form__btn">Создать</button>
+      </form>
+      <button type="button" class="popup__close"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_type_img">
+        <figure class="popup__container-img">
+        <img class="popup__img" src="" alt="" />
+        <figcaption class="popup__caption"></figcaption>
+        <button type="button" class="popup__close"></button>
+      </figure>
+  </div>
+
+  <template id="card">
+    <li class="element">
+      <img src="" alt="" class="element__img">
+      <button type="button" class="element__btn-trash"></button>
+      <div class="element__row">
+        <h2 class="element__name"></h2>
+        <button type="button" class="element__btn-like"></button>
+      </div>
+    </li>
+  </template>
+  
+  <script type="module" src="scripts/app.js"></script>
 </body>
 
 </html>
