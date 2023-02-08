@@ -12,13 +12,12 @@ const profileSelectors = [
     { sel: '.profile__subtitle', node: 'subtitle' },
 ];
 
-const profileNodes = initNodes(profileSelectors);
+export const profileNodes = initNodes(profileSelectors);
 
 export function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     profileNodes.title.textContent = forms.profileForm.elements.name.value;
     profileNodes.subtitle.textContent = forms.profileForm.elements.job.value;
-    evt.target.reset();
     closePopup(popups.profilePopup);
 }
 
