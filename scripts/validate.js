@@ -1,23 +1,23 @@
 import { forms } from './forms.js';
 
 const enableValidation = (options) => {
-    
+
     const opt = { ...options };
-    
+
     const showInputError = (formElement, inputElement, errorMessage) => {
         const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
         inputElement.classList.add(opt.inputErrorClass);
         errorElement.textContent = errorMessage;
         errorElement.classList.add(opt.errorClass);
     };
-    
+
     const hideInputError = (formElement, inputElement) => {
         const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
         inputElement.classList.remove(opt.inputErrorClass);
         errorElement.classList.remove(opt.errorClass);
         errorElement.textContent = 'Error';
     };
-    
+
     const isValid = (formElement, inputElement) => {
         if (!inputElement.validity.valid) {
             showInputError(formElement, inputElement, inputElement.validationMessage);
@@ -25,13 +25,13 @@ const enableValidation = (options) => {
             hideInputError(formElement, inputElement);
         }
     };
-    
+
     const hasInvalidInput = (inputList) => {
         return inputList.some((inputElement) => {
             return !inputElement.validity.valid;
         })
     };
-    
+
     const toggleButtonState = (inputList, buttonElement) => {
         buttonElement.classList.add(opt.inactiveButtonClass);
         if (hasInvalidInput(inputList)) {

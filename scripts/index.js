@@ -21,6 +21,11 @@ btn.editBtn.addEventListener('click', (event) => {
 
 btn.addBtn.addEventListener('click', (event) => {
     openPopup(popups.cardPopup);
+    if ((forms.cardForm.elements.name.value === "") && (forms.cardForm.elements.url.value === "")) {
+        forms.cardForm.elements.create.classList.add('form__btn_inactive');
+        forms.cardForm.elements.create.disabled = true;
+    }
+    
 });
 
 forms.profileForm.addEventListener('submit', handleProfileFormSubmit);

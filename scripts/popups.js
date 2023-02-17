@@ -17,7 +17,7 @@ export function openPopup(popup) {
 export function closePopup(popup) {
     popup.classList.remove('popup_opened');
     popup.removeEventListener('click', clickHeader);
-    document.removeEventListener('click', keydownHeader);
+    document.removeEventListener('keydown', keydownHeader);
 }
 
 const clickHeader = (event) => {
