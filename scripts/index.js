@@ -3,19 +3,41 @@ import Card from './Card.js';
 import Popup from './Popup.js';
 import Form from './Form.js';
 import FormValidator from './FormValidator.js';
-import { addCard } from './helpers.js';
+import CardList from './CardList.js';
 
-const cardTemplateSelector = '#card';
-const cardsContainerNode = document.querySelector('.elements');
+const selectors = {
+    card: {
+        template: '#card',
+        container: '.elements',
+        element: '.element',
+        img: '.element__img',
+        name: '.element__name',
+        btnTarsh: '.element__btn-trash',
+        btnLike: '.element__btn-like',
 
-const editBtnNode = document.querySelector('.profile__edit-btn');
-const addBtnNode = document.querySelector('.add-btn');
+    },
+    button: {
+        edit: '.profile__edit-btn',
+        add: '.add-btn',
+    },
+    profile: {
+        title: '.profile__title',
+        subtitle: '.profile__subtitle',
+    },
+    img: {
+        caption: '.popup__caption',
+        link: '.popup__img',
+    }
+};
 
-const profileTitleNode = document.querySelector('.profile__title');
-const profileSubtitleNode = document.querySelector('.profile__subtitle');
+const url = document.querySelector(selectors.img.link);
+const caption = document.querySelector(selectors.img.caption);
 
-const imgNode = document.querySelector('.popup__img');
-const captionNode = document.querySelector('.popup__caption');
+const title = document.querySelector(selectors.profile.title);
+const subtitle = document.querySelector(selectors.profile.subtitle);
+
+const buttonEdit = document.querySelector(selectors.button.edit);
+const buttonAdd = document.querySelector(selectors.button.add);
 
 const popups = {
     profilePopup: new Popup('.popup_type_profile'),
@@ -23,65 +45,69 @@ const popups = {
     imagePopup: new Popup('.popup_type_img'),
 };
 
-const handleProfileFormSubmit = (evt) => {
-    evt.preventDefault();
-    profileTitleNode.textContent = forms.profileForm.getInpitValue('name');
-    profileSubtitleNode.textContent = forms.profileForm.getInpitValue('job');
+const profileForm = new Form("profile-form", profileFormSubmit);
+const cardForm = new Form("card-form", cardPlaceSubmit);
+
+const cardList = new CardList(
+    selectors.card.container,
+    (data) => {
+        cardList.addCard(renderCard(data));
+    }
+);
+
+profileForm.setEventListeners();
+cardForm.setEventListeners();
+
+buttonEdit.addEventListener('click', () => {
+    popups.profilePopup.open();
+    formValidators['profile-form'].resetValidation();
+    profileForm.setInputValue('name', title.textContent);
+    profileForm.setInputValue('job', subtitle.textContent);
+});
+
+buttonAdd.addEventListener('click', () => {
+    popups.cardPopup.open();
+    formValidators['card-form'].resetValidation();
+});
+
+function renderCard(data) {
+    const card = new Card(
+        data,
+        {
+            toogleLike: (instance) => {
+                instance._btnToogleLike.classList.toggle('element__btn-like_active');
+            },
+            imageClick: (instance) => {
+                popups.imagePopup.open();
+                url.setAttribute('src', instance._link);
+                caption.setAttribute('alt', instance._name);
+                caption.textContent = instance._name;
+            },
+        },
+        selectors.card,
+    );
+    return card.createCard();
+}
+
+function profileFormSubmit(event) {
+    event.preventDefault();
+    title.textContent = profileForm.getInpitValue('name');
+    subtitle.textContent = profileForm.getInpitValue('job');
     popups.profilePopup.close();
 }
 
-const handleCardPlaceSubmit = (evt) => {
-    evt.preventDefault();
-    const name = forms.cardForm.getInpitValue('name');
-    const link = forms.cardForm.getInpitValue('url');
-    if (name && link) {
-        const card = new Card({ name, link }, cardTemplateSelector, handleCard);
-        addCard(cardsContainerNode, card.createCard(), false);
-        popups.cardPopup.close();
-        evt.target.reset();
-    }
+function cardPlaceSubmit(event) {
+    event.preventDefault();
+    const name = cardForm.getInpitValue('name');
+    const link = cardForm.getInpitValue('url');
+    cardList.addCard(renderCard({ name, link }));
+    event.target.reset();
+    popups.cardPopup.close();
 }
 
-const forms = {
-    profileForm: new Form("profile-form", handleProfileFormSubmit),
-    cardForm: new Form("card-form", handleCardPlaceSubmit),
-};
+cardList.renderCards(data);
 
-editBtnNode.addEventListener('click', (event) => {
-    popups.profilePopup.open();
-    forms.profileForm.setInputValue('name', profileTitleNode.textContent);
-    forms.profileForm.setInputValue('job', profileSubtitleNode.textContent);
-});
-
-addBtnNode.addEventListener('click', (event) => {
-    popups.cardPopup.open();
-    if ((forms.cardForm.getInpitValue('name') === "") || (forms.cardForm.getInpitValue('url') === "")) {
-        forms.cardForm.getRoot().elements.create.classList.add('form__btn_inactive');
-        forms.cardForm.getRoot().elements.create.disabled = true;
-    }
-});
-
-const handleCard = {
-    trash: (event) => {
-        event.target.closest('.element').remove();
-    },
-    like: (event) => {
-        event.target.classList.toggle('element__btn-like_active');
-    },
-    img: (event) => {
-        popups.imagePopup.open();
-        imgNode.setAttribute('src', event.target.getAttribute('src'));
-        captionNode.setAttribute('alt', event.target.getAttribute('alt'));
-        captionNode.textContent = event.target.getAttribute('alt');
-    },
-}
-
-data.forEach((item) => {
-    const card = new Card(item, cardTemplateSelector, handleCard);
-    addCard(cardsContainerNode, card.createCard());
-});
-
-const optFormValidator = {
+const config = {
     formSelector: '.form',
     inputSelector: '.form__input',
     submitButtonSelector: '.form__btn',
@@ -90,7 +116,16 @@ const optFormValidator = {
     errorClass: 'form__input-error_active'
 }
 
-Array.from(document.forms).forEach((form) => {
-    const formValidator = new FormValidator(optFormValidator, form);
-    formValidator.enableValidation();
-})
+const formValidators = {}
+
+const enableValidation = (config) => {
+    const formList = Array.from(document.querySelectorAll(config.formSelector))
+    formList.forEach((formElement) => {
+        const validator = new FormValidator(formElement, config)
+        const formName = formElement.getAttribute('name')
+        formValidators[formName] = validator;
+        validator.enableValidation();
+    });
+};
+
+enableValidation(config);

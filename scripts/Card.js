@@ -1,37 +1,44 @@
 export default class Card {
-    constructor(data, templateSelector, handle) {
-        this._templateSelector = templateSelector;
+    constructor(data, handle, selectors) {
         this._name = data.name;
         this._link = data.link;
-        this._handle = handle;
+        this._toogleLike = handle.toogleLike;
+        this._imageClick = handle.imageClick;
+        this._selectors = selectors;
+        Card._template = document.querySelector(this._selectors.template).content;
+
+        this._deleteCard = this._deleteCard.bind(this);
     }
 
     _getTemplate() {
-        const cardElement = document
-            .querySelector(this._templateSelector)
-            .content
-            .querySelector('.element')
-            .cloneNode(true);
-        return cardElement;
+        const element = Card._template.querySelector('.element').cloneNode(true);
+        return element;
     }
 
-    _setEventListeners() {
-        this._element.querySelector('.element__img')
-            .addEventListener('click', this._handle.img);
-        this._element.querySelector('.element__btn-trash')
-            .addEventListener('click', this._handle.trash);
-        this._element.querySelector('.element__btn-like')
-            .addEventListener('click', this._handle.like);
-    }
-
+    
     createCard() {
         this._element = this._getTemplate();
-        this._setEventListeners();
-        const imgNode = this._element.querySelector('.element__img');
-        imgNode.setAttribute('src', this._link);
-        imgNode.setAttribute('alt', this._name);
-        this._element.querySelector('.element__name').textContent = this._name;
+        
+        this._img = this._element.querySelector(this._selectors.img);
+        this._btnToogleLike = this._element.querySelector(this._selectors.btnLike);
+        this._btnDeleteCard = this._element.querySelector(this._selectors.btnTarsh);
+        
+        this._element.querySelector(this._selectors.name).textContent = this._name;
 
+        this._img.setAttribute('src', this._link);
+        this._img.setAttribute('alt', this._name);
+
+        this._setEventListeners();
         return this._element;
+    }
+    
+    _setEventListeners() {
+        this._img.addEventListener('click', () => { this._imageClick(this) });
+        this._btnDeleteCard.addEventListener('click', this._deleteCard);
+        this._btnToogleLike.addEventListener('click', () => { this._toogleLike(this) });
+    }
+
+    _deleteCard() {
+        this._element.remove();
     }
 }

@@ -1,7 +1,7 @@
 export default class Form {
-    constructor(name, handleSubmit) {
+    constructor(name, submitHandler) {
         this._form = document.forms[name];
-        this._form.addEventListener('submit', handleSubmit);
+        this._submitHandler = submitHandler;
     }
 
     getInpitValue(name) {
@@ -12,7 +12,10 @@ export default class Form {
         this._form.elements[name].value = value;
     }
 
-    getRoot() {
-        return this._form;
+    setEventListeners() {
+        this._form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            this._submitHandler(event, this);
+        });
     }
 }
