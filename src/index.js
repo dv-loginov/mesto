@@ -1,11 +1,12 @@
-import data from './data.js';
-import Card from './Card.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import Form from './Form.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import UserInfo from './UserInfo.js';
+import './pages/index.css';
+import data from './scripts/data.js';
+import Card from './scripts/Card.js';
+import PopupWithImage from './scripts/PopupWithImage.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
+import Form from './scripts/Form.js';
+import FormValidator from './scripts/FormValidator.js';
+import Section from './scripts/Section.js';
+import UserInfo from './scripts/UserInfo.js';
 
 const selectors = {
     card: {
