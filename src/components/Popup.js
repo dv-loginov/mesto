@@ -1,15 +1,17 @@
+import { popupClassName as popup } from '../utils/constants';
+
 export default class Popup {
     constructor(selector) {
         this._root = document.querySelector(selector);
     }
 
     open() {
-        this._root.classList.add('popup_opened');
+        this._root.classList.add(popup.popupOpened);
         this.setEventListeners();
     }
 
     close() {
-        this._root.classList.remove('popup_opened');
+        this._root.classList.remove(popup.popupOpened);
         this.resetEventListeners();
     }
 
@@ -29,7 +31,7 @@ export default class Popup {
 
     _handleClickClose = (event) => {
         const classList = event.target.classList;
-        if ([].includes.call(classList, 'popup') || [].includes.call(classList, 'popup__close')) {
+        if ([].includes.call(classList, popup.popup) || [].includes.call(classList, popup.popupClose)) {
             this.close();
         }
     }
