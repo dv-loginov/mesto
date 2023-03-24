@@ -57,7 +57,7 @@ function handleProfileFormSubmit(data) {
 }
 
 function handleCardPlaceSubmit(data) {
-    renderCard(data);
+    renderCard({name: data.name, link: data.url});
     cardPopup.close();
 }
 
