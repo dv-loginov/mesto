@@ -7,16 +7,19 @@ export const cardClass = {
     btnTarsh: '.element__btn-trash',
     btnLike: '.element__btn-like',
     btnLikeActiveClass: 'element__btn-like_active',
+    like: '.element__counter-like',
 };
 
 export const buttonClass = {
     edit: '.profile__edit-btn',
     add: '.add-btn',
+    avatar: '.profile__avatar-edit',
 }
 
 export const profileClass = {
     name: '.profile__title',
     job: '.profile__subtitle',
+    avatar: '.profile__avatar',
 }
 
 export const popupImageClass = {
@@ -34,6 +37,8 @@ export const popups = {
     profilePopup: '.popup_type_profile',
     cardPopup: '.popup_type_place',
     imagePopup: '.popup_type_img',
+    avatarPopup: '.popup_type_avatar',
+    deletePopup: '.popup_type_question',
 }
 
 export const formClass = {
@@ -49,3 +54,4 @@ export const formValidators = {}
 
 export const buttonEdit = document.querySelector(buttonClass.edit);
 export const buttonAdd = document.querySelector(buttonClass.add);
+export const buttonAvatar = document.querySelector(buttonClass.avatar);

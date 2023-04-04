@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
         this._form = this._root.querySelector(formClass.formSelector);
         this._submitForm = this._submitForm.bind(this);
         this._inputList = this._form.querySelectorAll(formClass.inputSelector);
+        this._btn =  this._form.querySelector(formClass.submitButtonSelector); 
     }
 
     _getInputValue() {
@@ -20,6 +21,7 @@ export default class PopupWithForm extends Popup {
 
     _submitForm(event) {
         event.preventDefault();
+        this.toogleButton(true);
         this._handleFormSubmit(this._getInputValue());
     }
 
@@ -42,5 +44,11 @@ export default class PopupWithForm extends Popup {
     close() {
         super.close();
         this._form.reset();
+    }
+
+    toogleButton(isSave) {
+        isSave
+        ? this._btn.textContent = 'Сохранение...'
+        : this._btn.textContent = 'Сохранить';
     }
 }
