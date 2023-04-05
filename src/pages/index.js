@@ -42,20 +42,13 @@ const handle = {
 
 const userInfo = new UserInfo(profileClass);
 
-const user = api.getUser();
-const initData = api.getInitialCards();
-
-
-
-initData
-    .then(cards => {
+Promise.all([api.getUser(), api.getInitialCards()])
+    .then((results) => {
+        const [user, cards] = results;
+        userInfo.setUserInfo({ name: user.name, job: user.about });
+        userInfo.setAvatar(user.avatar);
         cardList = new Section({ items: cards, renderer: renderCard }, cardClass.container)
-        user.then(user => {
-            Card._myID = user._id;
-            userInfo.setUserInfo({ name: user.name, job: user.about });
-            userInfo.setAvatar(user.avatar);
-            cardList.renderCards();
-        });
+        cardList.renderCards();
     })
     .catch(err => {
         console.log(err);
@@ -102,10 +95,10 @@ function handleProfileFormSubmit(data) {
     user
         .then((user) => {
             userInfo.setUserInfo({ name: user.name, job: user.about });
+            profilePopup.close()
         })
         .catch((err) => console.log(err))
         .finally(() => {
-            profilePopup.close()
             profilePopup.toogleButton(false);
         });
 };
@@ -115,10 +108,10 @@ function handleCardPlaceSubmit(data) {
     card
         .then((card) => {
             renderCard(card);
+            cardPopup.close();
         })
         .catch((err) => console.log(err))
         .finally(() => {
-            cardPopup.close();
             cardPopup.toogleButton(false);
         });
 };
@@ -128,10 +121,10 @@ function handleAvatarSubmit(data) {
     avatar
         .then((user) => {
             userInfo.setAvatar(user.avatar);
+            avatarPopup.close();
         })
         .catch((err) => console.log(err))
         .finally(() => {
-            avatarPopup.close()
             avatarPopup.toogleButton(false);
         });
 };
@@ -141,9 +134,9 @@ function handleQuestionSubmit({ id, instance }) {
     card
         .then((card) => {
             instance.deleteCard();
+            deletePopup.close();
         })
         .catch((err) => console.log(err));
-    deletePopup.close();
 }
 
 function renderCard(data) {
