@@ -77,8 +77,6 @@ buttonAvatar.addEventListener('click', () => {
     formValidators['avatar-form'].resetValidation();
 });
 
-
-
 function handleCardImageClick(data) {
     imagePopup.open(data);
 };
@@ -86,7 +84,7 @@ function handleCardImageClick(data) {
 function handleLikeClick({ id, isLike }, instance) {
     let like = {};
 
-    (isLike) ? like = api.setLike(id) : like = api.deleteLike(id)
+    (isLike) ? like = api.deleteLike(id) : like = api.setLike(id);
 
     like
         .then((card) => {
@@ -94,6 +92,10 @@ function handleLikeClick({ id, isLike }, instance) {
         })
         .catch((err) => console.log(err));
 };
+
+function handleDeleteCard(data) {
+    deletePopup.open(data);
+}
 
 function handleProfileFormSubmit(data) {
     const user = api.setUser(data);
@@ -144,10 +146,6 @@ function handleQuestionSubmit({ id, instance }) {
     deletePopup.close();
 }
 
-function handleDeleteCard(data) {
-    deletePopup.open(data);
-}
-
 function renderCard(data) {
     const card = createCard(data);
     cardList.addItem(card);
@@ -157,6 +155,7 @@ function createCard(data) {
     const cardElement = new Card(data, { handle });
     return cardElement.createCard();
 };
+
 const enableValidation = (config) => {
     const formList = Array.from(document.querySelectorAll(config.formSelector))
     formList.forEach((formElement) => {
