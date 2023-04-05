@@ -49,8 +49,8 @@ Promise.all([api.getUser(), api.getInitialCards()])
         userInfo.setUserInfo({ name: user.name, job: user.about });
         userInfo.setAvatar(user.avatar);
         Card._myID = user._id;
-        cardList = new Section({ items: cards, renderer: renderCard }, cardClass.container);
-        cardList.renderCards();
+        cardList = new Section({ renderer: renderCard }, cardClass.container);
+        cardList.renderItems(cards);
     })
     .catch(err => {
         console.log(err);
