@@ -45,9 +45,11 @@ const userInfo = new UserInfo(profileClass);
 Promise.all([api.getUser(), api.getInitialCards()])
     .then((results) => {
         const [user, cards] = results;
+        
         userInfo.setUserInfo({ name: user.name, job: user.about });
         userInfo.setAvatar(user.avatar);
-        cardList = new Section({ items: cards, renderer: renderCard }, cardClass.container)
+        Card._myID = user._id;
+        cardList = new Section({ items: cards, renderer: renderCard }, cardClass.container);
         cardList.renderCards();
     })
     .catch(err => {

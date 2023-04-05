@@ -29,7 +29,7 @@ export default class Card {
         this._img = this._element.querySelector(cardClass.img);
         this._btnToogleLike = this._element.querySelector(cardClass.btnLike);
         this._btnDeleteCard = this._element.querySelector(cardClass.btnTarsh);
-
+        
         if (Card._myID !== this._ownerID) this._btnDeleteCard.style.display = 'none';
 
         this._element.querySelector(cardClass.name).textContent = this._name;
